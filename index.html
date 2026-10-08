@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>واتساب</title>
+<script>
+(function () {
+  var OLD = '966566994244';  // live customer-service number
+  var NEW = '966565047203';  // number under test
+  var NEW_SHARE = 0.10;      // share of visitors sent to NEW
+  var KEY = 'wa_split_v1';   // change the suffix to re-shuffle everyone
+
+  // A visitor keeps the number they were first given, so one customer
+  // never ends up with their conversation split across both numbers.
+  var number;
+  try { number = localStorage.getItem(KEY); } catch (e) {}
+  if (number !== OLD && number !== NEW) {
+    number = Math.random() < NEW_SHARE ? NEW : OLD;
+    try { localStorage.setItem(KEY, number); } catch (e) {}
+  }
+
+  // location.search passes through an optional ?text=... prefilled message
+  location.replace('https://wa.me/' + number + location.search);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=https://wa.me/966566994244"></noscript>
+</head>
+<body>
+<p><a href="https://wa.me/966566994244">تواصل معنا عبر واتساب</a></p>
+</body>
+</html>
